@@ -28,7 +28,6 @@ public class UserRepoImpl implements UserRepo
 	@Override
 	public User findById(int id) {
 		Session session = sessionFactory.getCurrentSession();
-		
 		return session.get(User.class,id);
 	}
 	

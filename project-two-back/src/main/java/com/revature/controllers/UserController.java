@@ -19,7 +19,6 @@ import com.revature.models.User;
 import com.revature.services.UserServices;
 
 @RestController
-@RequestMapping(value="/user", consumes = {MediaType.APPLICATION_JSON_VALUE})
 @CrossOrigin
 public class UserController {
 	private UserServices userService;
@@ -31,12 +30,13 @@ public class UserController {
 		this.userService = userService;
 	}
 	
+	@RequestMapping(value="/doLogin", consumes = {MediaType.APPLICATION_JSON_VALUE})
 	@PostMapping
 	public  ResponseEntity<Object> userLogin(@RequestBody User loginUserInfo)
 	{
 		// NOTES(): I don't know if this a good idea security wise, but it's much easier.
 		boolean success = false;
-		HashMap<String,String> returnedData = new HashMap<String,String>();
+		HashMap<String,Object> returnedData = new HashMap<String,Object>();
 		User user = userService.findUserByName(loginUserInfo.getUsername());
 		
 		if (user != null)
@@ -45,7 +45,8 @@ public class UserController {
 			{
 				// TODO(): This should also return list of friends!
 				success = true;
-				returnedData.put("id", "" + user.getId());
+				returnedData.put("id",  user.getId());
+				returnedData.put("friends", user.GetFriends());
 			} 
 		} 
 		
