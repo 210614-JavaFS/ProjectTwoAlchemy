@@ -4,6 +4,7 @@ import React from "react";
 const Register:React.FC<unknown> = (props) => {
 
     return(
+      <div className="container" >
         <div className="row">
          <form className="col s12">
             <div className="row">
@@ -29,6 +30,7 @@ const Register:React.FC<unknown> = (props) => {
               </div>
             </div>
         </form>
+        </div>
         </div>
     )
 }

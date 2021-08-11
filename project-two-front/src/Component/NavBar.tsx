@@ -5,7 +5,7 @@ const NavBar:React.FC<unknown> = (props) => {
 
   return (
     <nav>
-            <div className="navbar navbar-dark bg-dark">
+            <div className="navbar-dark bg-dark">
                 <a href="https://scrabble.hasbro.com/en-us/rules" target="_blank" className="brand-logo">Scrabble Assistant</a>
             </div>
     </nav>
