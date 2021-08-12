@@ -1,7 +1,8 @@
 import React from 'react'
+import {Link} from 'react-router-dom';
 
 
-const Login:React.FC<unknown> = (props) => {
+export const Login:React.FC<unknown> = (props) => {
 
   return (
         <div className="nav-wrapper container">
@@ -18,6 +19,7 @@ const Login:React.FC<unknown> = (props) => {
             </div>
           </form>
           <button type="button" className="btn btn-dark">Login</button>
+          <p>Don't have an Account Click<Link to="/register">Register</Link></p>
         </div>
   );
 }
