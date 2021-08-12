@@ -1,45 +1,56 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Route, Switch, useHistory, withRouter } from 'react-router-dom';
+import {User} from './models/user';
 import './App.css';
 import NavBar from './Component/NavBar';
 import Login from './Component/login';
 import Register from './Component/register';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import data from './data.json';
+import Profile from './Component/profile/profile';
 
 
-class App extends React.Component <{}, {isLoginActive: boolean;}>{
-  constructor(props:any){
-    super(props);
-    this.state={
-      isLoginActive:true
+function App() {
+  const [users, setUsers] = useState<User[]>(data);
+  const history = useHistory();
+  const logout = () =>{
+    setUsers([]);
+    console.log(users);
+  }
+  const checkUserLoggedIn = () => {
+    if(users.length === 0){
+      history.replace("/");
     }
   }
-  render(){
-    const { isLoginActive }=this.state;
-    const current = isLoginActive ? "Register" : "Login";
-    const currentActive = isLoginActive ? "login" : "register";
-    return(
 
+  return (
+    <React.Fragment>
       <div className="App">
-        <div className="login">
-            <NavBar/>
-            {isLoginActive && ( <Login/> )}
-            {!isLoginActive && <Register/> }
-          </div>
-        </div>
-    )
-  }
+      <NavBar users={users} logout={logout}/>
+        <Switch>
+              <Route exact path="/">
+                <Login />
+              </Route>
+              <Route exact path="/register">
+                <Register />
+              </Route>
+              <Route exact path="/rules" component={()=>{
+                console.log('in rules now');
+                window.open('https://scrabble.hasbro.com/en-us/rules');
+                return null;
+              }} />
+              <Route exact path="/profile" >
+                <Profile users={users} checkUserLoggedIn={checkUserLoggedIn}/>
+              </Route>       
+      </Switch>
+     </div>
+    </React.Fragment>
+    
+    
+        
+      
+    
+  );
 }
 
- function bottom(props:any){
-    <div className="bottom" ref={props.containerRef} onClick={props.onClick}>
-      <div className="inner-container">
-        <div className="text">{props.current}</div>
-      </div>
-    </div>
- }
-
-
-export default App;
-
-
-
-
+export default withRouter(App);
