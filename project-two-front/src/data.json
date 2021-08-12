@@ -14,5 +14,12 @@
         {"uId":1,"username":"Javier","gamesPlayed":5000,"gamesWon":2500},
         {"uId":3,"username":"Tim","gamesPlayed":6000,"gamesWon":2500}
     ]
+ },
+ {
+    "uId":1,
+    "username":"Natee",
+    "gamesPlayed":3000,
+    "gamesWon":2500,
+    "friends":[]
  }
 ]

@@ -21,6 +21,7 @@ type Props = {
                 </div>
             </div>
             <div className="col-md-5">
+                <h6>Friends</h6>
                 <table className="table table-sm table-borderless">
                     <thead>
                         <tr>
@@ -32,7 +33,7 @@ type Props = {
                         </tr>
                     </thead>
                     <tbody>
-                        {props.user.friends.map(friend => {
+                        {props.user.friends && props.user.friends.map(friend => {
                             return(
                             <React.Fragment>
                                 <tr>
