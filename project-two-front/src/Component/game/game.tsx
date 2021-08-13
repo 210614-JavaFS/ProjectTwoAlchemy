@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
+import axios from 'axios';
 import {User} from '../../models/user';
 import GameInput from './gameInput';
 import {ScoreCard} from './scoreCard';
+import {wordScorer} from '../../utils/utils';
 
 type userCard = {
     position:number,
@@ -37,6 +39,22 @@ export const Game:React.FC<Props> = (props)=>{
         }
     }
 
+    async function handleSubmit(e:any):Promise<any> {
+        await axios.get('https://api.dictionaryapi.dev/api/v2/entries/en/'+(userInput)).then(
+            (resp) =>{
+                let scoreCards:userCard[] = [...scoreCard];
+                scoreCards[turn].score+=wordScorer(userInput);
+                //call function to change to next player
+                nextTurn();
+                setScoreCard(scoreCards);
+            }, ()=>{
+                //props.turns.setTurn();
+                alert("Sorry! That is not a word. Try again!");
+                //cal function to change turns
+            });    
+        setUserInput("");
+    }
+
     return(
         <div className="container-fluid p-3  min-vh-100">
             <div className="row d-flex justify-content-center">
@@ -51,7 +69,7 @@ export const Game:React.FC<Props> = (props)=>{
             </div>
             <div className="row flex-fill mt-5">
                 <div className="col-12">
-                   <GameInput turns={{"turn":turn,"setTurn":nextTurn}} scoreCard={scoreCard} setScoreCard={setScoreCard} userInput={userInput} setUserInput={setUserInput} /> 
+                   <GameInput handleSubmit={handleSubmit}  userInput={userInput} setUserInput={setUserInput} /> 
                 </div>
                 
             </div>
