@@ -34,7 +34,7 @@ export const GameInput:React.FC<Props> = (props)=>{
                 props.turns.setTurn();
                 props.setScoreCard(scoreCards);
             }, ()=>{
-                props.turns.setTurn();
+                //props.turns.setTurn();
                 alert("Sorry that is not a word. Try again in your next turn.");
                 //cal function to change turns
             });    
