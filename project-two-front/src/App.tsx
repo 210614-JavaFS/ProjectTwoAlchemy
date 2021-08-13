@@ -8,6 +8,7 @@ import Register from './Component/register';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import data from './data.json';
 import Profile from './Component/profile/profile';
+import Game from './Component/game/game';
 
 
 function App() {
@@ -41,6 +42,9 @@ function App() {
               }} />
               <Route exact path="/profile" >
                 <Profile users={users} checkUserLoggedIn={checkUserLoggedIn}/>
+              </Route>  
+              <Route exact path="/game" >
+                <Game users={users} checkUserLoggedIn={checkUserLoggedIn}/>
               </Route>       
       </Switch>
      </div>

@@ -39,8 +39,11 @@ const NavBar:React.FC<Props> = (props) => {
               {props.users.length
               ? <React.Fragment>
                 <li className="nav-item">
+                  <Link className="nav-link" to='/game'>Play</Link>
+                </li>
+                <li className="nav-item">
                   <Link className="nav-link" to='/profile'>Profile</Link>
-                </li>  
+                </li>
               </React.Fragment>
               : ""
               }
