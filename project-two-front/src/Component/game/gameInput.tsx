@@ -15,8 +15,7 @@ export const GameInput:React.FC<Props> = (props)=>{
 
     async function handleSubmit(e:any):Promise<any> {
         e.preventDefault();
-        await props.handleSubmit();   
-        props.setUserInput("");
+        await props.handleSubmit();
     }
     return(
         <form onSubmit={handleSubmit}>
