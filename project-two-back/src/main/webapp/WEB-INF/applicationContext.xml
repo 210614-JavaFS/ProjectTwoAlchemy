@@ -19,13 +19,12 @@
 	<tx:annotation-driven/>
 	<mvc:annotation-driven/>
 	
-	
      <bean name="ourDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
     	<property name="driverClassName" value="org.postgresql.Driver" />
     	<!-- Insert Database URL, username and password property below-->
-    	<property name="url" value="" />
-    	<property name="username" value="" />
-    	<property name="password" value="" />
+    	<property name="url" value="jdbc:postgresql://database-1.c2ebawtrdthw.us-east-2.rds.amazonaws.com:5432/demos" />
+    	<property name="username" value="postgres" />
+    	<property name="password" value="password" />
     </bean>
     
     <bean name="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
@@ -35,7 +34,7 @@
     		<props>
     			<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
     			<!-- Insert desired Schema to use below -->
-    			<!-- <prop key="hibernate.default_schema">poke</prop> -->
+    			<prop key="hibernate.default_schema">spring</prop>
     			<prop key="show_sql">true</prop>
     			<prop key="hibernate.hbm2ddl.auto">update</prop>
     		</props>
@@ -45,7 +44,7 @@
     <bean name="transactionManager" 
     	class="org.springframework.orm.hibernate5.HibernateTransactionManager">
     	<property name="sessionFactory" ref="sessionFactory" />
-    	<property name="nestedTransactionAllowed" value="true" />
+    	<property name="nestedTransactionAllowed" value="false" />
     </bean>
     
 </beans>
