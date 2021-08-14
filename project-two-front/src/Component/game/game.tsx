@@ -3,7 +3,7 @@ import axios from 'axios';
 import {User} from '../../models/user';
 import GameInput from './gameInput';
 import {ScoreCard} from './scoreCard';
-import {wordScorer} from '../../utils/utils';
+import {wordScorer,wordTiler} from '../../utils/utils';
 
 type userCard = {
     position:number,
@@ -41,21 +41,25 @@ export const Game:React.FC<Props> = (props)=>{
         }
     }
 
+    const updateTiler = (input:string)=>{
+        htmlString = wordTiler(input);
+    }
+
     async function handleSubmit(e:any):Promise<any> {
         let finalizeTurn
         await axios.get('https://api.dictionaryapi.dev/api/v2/entries/en/'+(userInput)).then(
             (resp) =>{
                 let scoreCards:userCard[] = [...scoreCard];
-                let wordScorerResults = wordScorer(userInput);
-                htmlString = wordScorerResults.htmlString;
-                scoreCards[turn].score+=wordScorerResults.wordScore;
+                scoreCards[turn].score+=wordScorer(userInput);
                 //call function to change to next player
                 nextTurn();
                 setScoreCard(scoreCards);
+                htmlString="";
             }, ()=>{
                 //props.turns.setTurn();
                 alert("Sorry! That is not a word. Try again!");
                 //cal function to change turns
+                htmlString="";
             });    
         setUserInput("");
     }
@@ -72,10 +76,10 @@ export const Game:React.FC<Props> = (props)=>{
                     )
                 })}
             </div>
-            <div dangerouslySetInnerHTML= {{__html: htmlString}}></div>
+            <div className="mt-5" dangerouslySetInnerHTML= {{__html: htmlString}}></div>
             <div className="row flex-fill mt-5">
                 <div className="col-12">
-                   <GameInput handleSubmit={handleSubmit}  userInput={userInput} setUserInput={setUserInput} /> 
+                   <GameInput handleSubmit={handleSubmit}  userInput={userInput} setUserInput={setUserInput} updateTiler={updateTiler} /> 
                 </div>
                 
             </div>

@@ -27,6 +27,175 @@ import Zimg from "../ScrabbleLetters/Scrabble-tile-Z-wood-150x150.jpg";
 
 export function wordScorer(wordString:string){
     let wordScore = 0;
+    for(let i = 0; i < wordString.length; ++i)
+    {
+        let myChar = wordString.charAt(i);
+        switch(myChar)
+        {
+            case 'a':
+                wordScore += 1;
+            break;
+            case 'A':
+                wordScore += 1;
+            break;
+            case 'b':
+                wordScore += 3;
+            break;
+            case 'B':
+                wordScore += 3;
+            break;
+            case 'c':
+                wordScore += 3;
+            break;
+            case 'C':
+                wordScore += 3;
+            break;
+            case 'd':
+                wordScore += 2;
+            break;
+            case 'D':
+                wordScore += 2;
+            break;
+            case 'e':
+                wordScore += 1;
+            break;
+            case 'E':
+                wordScore += 1;
+            break;
+            case 'f':
+                wordScore += 4;
+            break;
+            case 'F':
+                wordScore += 4;
+            break;
+            case 'g':
+                wordScore += 2;
+            break;
+            case 'G':
+                wordScore += 2;
+            break;
+            case 'h':
+                wordScore += 4;
+            break;
+            case 'H':
+                wordScore += 4;
+            break;
+            case 'i':
+                wordScore += 1;
+            break;
+            case 'I':
+                wordScore += 1;
+            break;
+            case 'j':
+                wordScore += 8;
+            break;
+            case 'J':
+                wordScore += 8;
+            break;
+            case 'k':
+                wordScore += 5;
+            break;
+            case 'K':
+                wordScore += 5;
+            break;
+            case 'l':
+                wordScore += 1;
+            break;
+            case 'L':
+                wordScore += 1;
+            break;
+            case 'm':
+                wordScore += 3;
+            break;
+            case 'M':
+                wordScore += 3;
+            break;
+            case 'n':
+                wordScore += 1;
+            break;
+            case 'N':
+                wordScore += 1;
+            break;
+            case 'o':
+                wordScore += 1;
+            break;
+            case 'O':
+                wordScore += 1;
+            break;
+            case 'p':
+                wordScore += 3;
+            break;
+            case 'P':
+                wordScore += 3;
+            break;
+            case 'q':
+                wordScore += 10;
+            break;
+            case 'Q':
+                wordScore += 10;
+            break;
+            case 'r':
+                wordScore += 1;
+            break;
+            case 'R':
+                wordScore += 1;
+            break;
+            case 's':
+                wordScore += 1;
+            break;
+            case 'S':
+                wordScore += 1;
+            break;
+            case 't':
+                wordScore += 1;
+            break;
+            case 'T':
+                wordScore += 1;
+            break;
+            case 'u':
+                wordScore += 1;
+            break;
+            case 'U':
+                wordScore += 1;
+            break;
+            case 'v':
+                wordScore += 4;
+            break;
+            case 'V':
+                wordScore += 4;
+            break;
+            case 'w':
+                wordScore += 4;
+            break;
+            case 'W':
+                wordScore += 4;
+            break;
+            case 'x':
+                wordScore += 8;
+            break;
+            case 'X':
+                wordScore += 8;
+            break;
+            case 'y':
+                wordScore += 4;
+            break;
+            case 'Y':
+                wordScore += 4;
+            break;
+            case 'z':
+                wordScore += 10;
+            break;
+            case 'Z':
+                wordScore += 10;
+            break;
+            default:
+            break;
+        }
+    }
+    return wordScore;
+}
+
+export function wordTiler(wordString:string){
     let htmlString = "<span>";
     let tileWidth = 50;
     for(let i = 0; i < wordString.length; ++i)
@@ -35,211 +204,159 @@ export function wordScorer(wordString:string){
         switch(myChar)
         {
             case 'a':
-                wordScore += 1;
                 htmlString += `<img src=` + Aimg + ` alt="Aimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'A':
-                wordScore += 1;
                 htmlString += `<img src=` + Aimg + ` alt="Aimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'b':
-                wordScore += 3;
                 htmlString += `<img src=` + Bimg + ` alt="Bimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'B':
-                wordScore += 3;
                 htmlString += `<img src=` + Bimg + ` alt="Bimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'c':
-                wordScore += 3;
                 htmlString += `<img src=` + Cimg + ` alt="Cimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'C':
-                wordScore += 3;
                 htmlString += `<img src=` + Cimg + ` alt="Cimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'd':
-                wordScore += 2;
                 htmlString += `<img src=` + Dimg + ` alt="Dimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'D':
-                wordScore += 2;
                 htmlString += `<img src=` + Dimg + ` alt="Dimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'e':
-                wordScore += 1;
                 htmlString += `<img src=` + Eimg + ` alt="Eimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'E':
-                wordScore += 1;
                 htmlString += `<img src=` + Eimg + ` alt="Eimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'f':
-                wordScore += 4;
                 htmlString += `<img src=` + Fimg + ` alt="Fimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'F':
-                wordScore += 4;
                 htmlString += `<img src=` + Fimg + ` alt="Fimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'g':
-                wordScore += 2;
                 htmlString += `<img src=` + Gimg + ` alt="Gimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'G':
-                wordScore += 2;
                 htmlString += `<img src=` + Gimg + ` alt="Gimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'h':
-                wordScore += 4;
                 htmlString += `<img src=` + Himg + ` alt="Himage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'H':
-                wordScore += 4;
                 htmlString += `<img src=` + Himg + ` alt="Himage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'i':
-                wordScore += 1;
                 htmlString += `<img src=` + Iimg + ` alt="Iimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'I':
-                wordScore += 1;
                 htmlString += `<img src=` + Iimg + ` alt="Iimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'j':
-                wordScore += 8;
                 htmlString += `<img src=` + Jimg + ` alt="Jimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'J':
-                wordScore += 8;
                 htmlString += `<img src=` + Jimg + ` alt="Jimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'k':
-                wordScore += 5;
                 htmlString += `<img src=` + Kimg + ` alt="Kimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'K':
-                wordScore += 5;
                 htmlString += `<img src=` + Kimg + ` alt="Kimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'l':
-                wordScore += 1;
                 htmlString += `<img src=` + Limg + ` alt="Limage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'L':
-                wordScore += 1;
                 htmlString += `<img src=` + Limg + ` alt="Limage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'm':
-                wordScore += 3;
                 htmlString += `<img src=` + Mimg + ` alt="Mimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'M':
-                wordScore += 3;
                 htmlString += `<img src=` + Mimg + ` alt="Mimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'n':
-                wordScore += 1;
                 htmlString += `<img src=` + Nimg + ` alt="Nimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'N':
-                wordScore += 1;
                 htmlString += `<img src=` + Nimg + ` alt="Nimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'o':
-                wordScore += 1;
                 htmlString += `<img src=` + Oimg + ` alt="Oimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'O':
-                wordScore += 1;
                 htmlString += `<img src=` + Oimg + ` alt="Oimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'p':
-                wordScore += 3;
                 htmlString += `<img src=` + Pimg + ` alt="Pimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'P':
-                wordScore += 3;
                 htmlString += `<img src=` + Pimg + ` alt="Pimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'q':
-                wordScore += 10;
                 htmlString += `<img src=` + Qimg + ` alt="Qimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'Q':
-                wordScore += 10;
                 htmlString += `<img src=` + Qimg + ` alt="Qimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'r':
-                wordScore += 1;
                 htmlString += `<img src=` + Rimg + ` alt="Rimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'R':
-                wordScore += 1;
                 htmlString += `<img src=` + Rimg + ` alt="Rimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 's':
-                wordScore += 1;
                 htmlString += `<img src=` + Simg + ` alt="Simage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'S':
-                wordScore += 1;
                 htmlString += `<img src=` + Simg + ` alt="Simage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 't':
-                wordScore += 1;
                 htmlString += `<img src=` + Timg + ` alt="Timage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'T':
-                wordScore += 1;
                 htmlString += `<img src=` + Timg + ` alt="Timage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'u':
-                wordScore += 1;
                 htmlString += `<img src=` + Uimg + ` alt="Uimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'U':
-                wordScore += 1;
                 htmlString += `<img src=` + Uimg + ` alt="Uimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'v':
-                wordScore += 4;
                 htmlString += `<img src=` + Vimg + ` alt="Vimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'V':
-                wordScore += 4;
                 htmlString += `<img src=` + Vimg + ` alt="Vimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'w':
-                wordScore += 4;
                 htmlString += `<img src=` + Wimg + ` alt="Wimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'W':
-                wordScore += 4;
                 htmlString += `<img src=` + Wimg + ` alt="Wimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'x':
-                wordScore += 8;
                 htmlString += `<img src=` + Ximg + ` alt="Ximage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'X':
-                wordScore += 8;
                 htmlString += `<img src=` + Ximg + ` alt="Ximage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'y':
-                wordScore += 4;
                 htmlString += `<img src=` + Yimg + ` alt="Yimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'Y':
-                wordScore += 4;
                 htmlString += `<img src=` + Yimg + ` alt="Yimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'z':
-                wordScore += 10;
                 htmlString += `<img src=` + Zimg + ` alt="Zimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             case 'Z':
-                wordScore += 10;
                 htmlString += `<img src=` + Zimg + ` alt="Zimage" width="` + tileWidth +`"height="` + tileWidth + `"/>`;
             break;
             default:
@@ -247,10 +364,7 @@ export function wordScorer(wordString:string){
         }
     }
     htmlString += "</span>";
-    return {
-        wordScore,
-        htmlString
-    };
+    return htmlString;
 }
 
 export default wordScorer;
