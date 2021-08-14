@@ -11,7 +11,6 @@ import com.revature.repos.UserRepoImpl;
 @Service
 @Component
 public class UserServices {
-	
 	private UserRepo userRepoImpl;
 	
 	@Autowired
@@ -31,8 +30,8 @@ public class UserServices {
 		return this.userRepoImpl.findByName(username);
 	}
 
-
-	public void setUserRepoImpl(UserRepoImpl userRepoImpl) {
-		this.userRepoImpl = userRepoImpl;
+	public void update(User user)
+	{
+		this.userRepoImpl.update(user);
 	}
 }

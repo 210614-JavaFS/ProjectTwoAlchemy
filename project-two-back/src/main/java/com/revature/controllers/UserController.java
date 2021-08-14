@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,39 @@ public class UserController {
 		this.userService = userService;
 	}
 	
+	@RequestMapping(value="/", consumes = { MediaType.APPLICATION_JSON_VALUE})
+	@GetMapping
+	public ResponseEntity<Object> index()
+	{
+		HashMap<String,Object> returnedData = new HashMap<String,Object>();
+		returnedData.put("success", "it works~");
+		
+		return new ResponseEntity<Object>(returnedData,HttpStatus.OK);
+	}
+	
+	
+	
+	@RequestMapping(value="/updateWins", consumes = {MediaType.APPLICATION_JSON_VALUE})
+	@PostMapping
+	public ResponseEntity<Object> updateWins(@RequestBody User updatedInfo)
+	{
+		int userId =  updatedInfo.getId();
+		int gamesWon =   updatedInfo.getGamesWon();
+		
+		User user =  userService.findUserById(userId);
+		HashMap<String,Object> returnedData = new HashMap<String,Object>();
+		
+		if (user != null)
+		{
+			user.setGamesWon(gamesWon);
+			userService.update(user);
+			returnedData.put("success", "true");
+		} else {
+			returnedData.put("error", "User not found");
+		}
+		return new ResponseEntity<Object>(returnedData,HttpStatus.OK);
+	}
+	
 	@RequestMapping(value="/doLogin", consumes = {MediaType.APPLICATION_JSON_VALUE})
 	@PostMapping
 	public  ResponseEntity<Object> userLogin(@RequestBody User loginUserInfo)
@@ -46,6 +80,8 @@ public class UserController {
 				// TODO(): This should also return list of friends!
 				success = true;
 				returnedData.put("id",  user.getId());
+				returnedData.put("games_won",  user.getGamesWon());
+				returnedData.put("games_played", user.getGamesPlayed());
 				returnedData.put("friends", user.GetFriends());
 			} 
 		} 
@@ -57,5 +93,7 @@ public class UserController {
 		
 		return  new ResponseEntity<Object>(returnedData,HttpStatus.OK);
 	}
+	
+	
 	
 }

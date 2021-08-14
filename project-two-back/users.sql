@@ -1,0 +1,1 @@
+insert into user values (1,0,0,"sherlock","sherlock")

@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
@@ -24,6 +25,8 @@ public class User {
 	private int id;
 	private String username;
 	private String password;
+	private int gamesWon;
+	private int gamesPlayed;
 	
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 	@JsonManagedReference
@@ -54,5 +57,17 @@ public class User {
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	public int getGamesWon() {
+		return gamesWon;
+	}
+	public void setGamesWon(int gamesWon) {
+		this.gamesWon = gamesWon;
+	}
+	public int getGamesPlayed() {
+		return gamesPlayed;
+	}
+	public void setGamesPlayed(int gamesPlayed) {
+		this.gamesPlayed = gamesPlayed;
 	}
 }
