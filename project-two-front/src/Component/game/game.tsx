@@ -15,6 +15,8 @@ type Props = {
     checkUserLoggedIn:any
 }
 
+let htmlString = "";
+
 export const Game:React.FC<Props> = (props)=>{
     props.checkUserLoggedIn();
     const [scoreCard, setScoreCard] = useState<userCard[]>(()=>{
@@ -40,10 +42,13 @@ export const Game:React.FC<Props> = (props)=>{
     }
 
     async function handleSubmit(e:any):Promise<any> {
+        let finalizeTurn
         await axios.get('https://api.dictionaryapi.dev/api/v2/entries/en/'+(userInput)).then(
             (resp) =>{
                 let scoreCards:userCard[] = [...scoreCard];
-                scoreCards[turn].score+=wordScorer(userInput);
+                let wordScorerResults = wordScorer(userInput);
+                htmlString = wordScorerResults.htmlString;
+                scoreCards[turn].score+=wordScorerResults.wordScore;
                 //call function to change to next player
                 nextTurn();
                 setScoreCard(scoreCards);
@@ -67,6 +72,7 @@ export const Game:React.FC<Props> = (props)=>{
                     )
                 })}
             </div>
+            <div dangerouslySetInnerHTML= {{__html: htmlString}}></div>
             <div className="row flex-fill mt-5">
                 <div className="col-12">
                    <GameInput handleSubmit={handleSubmit}  userInput={userInput} setUserInput={setUserInput} /> 
