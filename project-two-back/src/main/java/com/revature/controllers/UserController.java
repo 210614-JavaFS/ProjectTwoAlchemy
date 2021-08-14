@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.models.Friend;
 import com.revature.models.User;
 import com.revature.services.UserServices;
 
@@ -40,8 +42,6 @@ public class UserController {
 		
 		return new ResponseEntity<Object>(returnedData,HttpStatus.OK);
 	}
-	
-	
 	
 	@RequestMapping(value="/updateWins", consumes = {MediaType.APPLICATION_JSON_VALUE})
 	@PostMapping
@@ -77,12 +77,30 @@ public class UserController {
 		{
 			if (user.getPassword().equals(loginUserInfo.getPassword()))
 			{
-				// TODO(): This should also return list of friends!
 				success = true;
 				returnedData.put("id",  user.getId());
+				returnedData.put("username",  user.getUsername());
 				returnedData.put("games_won",  user.getGamesWon());
 				returnedData.put("games_played", user.getGamesPlayed());
-				returnedData.put("friends", user.GetFriends());
+				
+				List<Friend> userFriends = user.GetFriends();
+				List<HashMap<String, Object>> userFriendInfo = new ArrayList<HashMap<String, Object>>();
+				/*
+				 * TODO(): Make a SQL version of this for max optimization!!!
+				 */
+				for (int userFriendsIndex = 0; userFriendsIndex < userFriends.size(); userFriendsIndex++)
+				{
+					Friend myFriend = userFriends.get(userFriendsIndex);
+					User friendUser = userService.findUserById(myFriend.getFuid());
+					HashMap<String, Object> friendsInfo  = new HashMap<String, Object>();
+					friendsInfo.put("id", friendUser.getId());
+					friendsInfo.put("username", friendUser.getUsername());
+					friendsInfo.put("gamesWons", friendUser.getGamesWon());
+					friendsInfo.put("gamesPlayed", friendUser.getGamesPlayed());
+					
+					userFriendInfo.add(friendsInfo);
+				}
+				returnedData.put("friends", userFriendInfo);;
 			} 
 		} 
 		
@@ -93,7 +111,4 @@ public class UserController {
 		
 		return  new ResponseEntity<Object>(returnedData,HttpStatus.OK);
 	}
-	
-	
-	
 }
