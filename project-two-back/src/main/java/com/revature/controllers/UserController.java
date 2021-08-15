@@ -63,7 +63,28 @@ public class UserController {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).build();
 		//ResponseEntity wraps the object we are returning and allows to set metadata like a response code.
 	}	
+
 	
+	@RequestMapping(value="/updateGamesPlayed", consumes = {MediaType.APPLICATION_JSON_VALUE})
+	@PostMapping
+	public ResponseEntity<Object> updateGamePlayed(@RequestBody User updatedInfo)
+	{
+		int userID = updatedInfo.getId();
+		int gamesPlayed = updatedInfo.getGamesPlayed();
+		
+		User user = userService.findUserById(updatedInfo.getId());
+		HashMap<String, Object> returnedData = new HashMap<String, Object>();
+		if (user != null)
+		{
+			user.setGamesPlayed(gamesPlayed);
+			userService.update(user);
+			returnedData.put("success", "true");
+		} else {
+			returnedData.put("error", "user with the id " + userID + " does not exist!");
+		}
+		
+		return new ResponseEntity<Object>(returnedData,HttpStatus.OK);
+	}
 	@RequestMapping(value="/updateWins", consumes = {MediaType.APPLICATION_JSON_VALUE})
 	@PostMapping
 	public ResponseEntity<Object> updateWins(@RequestBody User updatedInfo)
@@ -85,7 +106,7 @@ public class UserController {
 		return new ResponseEntity<Object>(returnedData,HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/doLogin", consumes = {MediaType.APPLICATION_JSON_VALUE})
+	@RequestMapping(value="/login", consumes = {MediaType.APPLICATION_JSON_VALUE})
 	@PostMapping
 	public  ResponseEntity<Object> userLogin(@RequestBody User loginUserInfo)
 	{
