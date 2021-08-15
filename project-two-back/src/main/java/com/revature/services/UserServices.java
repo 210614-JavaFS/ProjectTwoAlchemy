@@ -34,4 +34,9 @@ public class UserServices {
 	{
 		this.userRepoImpl.update(user);
 	}
+	
+	public void addUser(User user)
+	{
+		this.userRepoImpl.insert(user);
+	}
 }

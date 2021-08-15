@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -42,6 +43,26 @@ public class UserController {
 		
 		return new ResponseEntity<Object>(returnedData,HttpStatus.OK);
 	}
+	
+	// NOTE(): Bryan's code!!
+	@RequestMapping(value="/register", consumes = {MediaType.APPLICATION_JSON_VALUE})
+	@PostMapping
+	public ResponseEntity<User> addUser(@RequestBody User user){
+		//@RequestBody is parsing the request's body into an object with Jackson. 
+		user.setGamesWon(0);
+		user.setGamesPlayed(0);
+		userService.addUser(user);
+		return ResponseEntity.status(HttpStatus.CREATED).build();
+		//ResponseEntity wraps the object we are returning and allows to set metadata like a response code.
+	}
+	
+	@PutMapping("/update")
+	public ResponseEntity<User> updateUser(@RequestBody User user){
+		//@RequestBody is parsing the request's body into an object with Jackson. 
+		userService.update(user);
+		return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+		//ResponseEntity wraps the object we are returning and allows to set metadata like a response code.
+	}	
 	
 	@RequestMapping(value="/updateWins", consumes = {MediaType.APPLICATION_JSON_VALUE})
 	@PostMapping
