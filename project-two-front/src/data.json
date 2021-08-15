@@ -1,22 +1,22 @@
 [{
-    "uId":1,
+    "id":1,
     "username":"Javier",
     "gamesPlayed":3000,
     "gamesWon":2500,
-    "friends":[{"uId":2,"username":"Aaron","gamesPlayed":5000,"gamesWon":2765}]
+    "friends":[{"id":2,"username":"Aaron","gamesPlayed":5000,"gamesWon":2765}]
  },
  {
-    "uId":2,
+    "id":2,
     "username":"Aaron",
     "gamesPlayed":3000,
     "gamesWon":2765,
     "friends":[
-        {"uId":1,"username":"Javier","gamesPlayed":5000,"gamesWon":2500},
-        {"uId":3,"username":"Tim","gamesPlayed":6000,"gamesWon":2500}
+        {"id":1,"username":"Javier","gamesPlayed":5000,"gamesWon":2500},
+        {"id":3,"username":"Tim","gamesPlayed":6000,"gamesWon":2500}
     ]
  },
  {
-    "uId":1,
+    "id":1,
     "username":"Natee",
     "gamesPlayed":3000,
     "gamesWon":2500,

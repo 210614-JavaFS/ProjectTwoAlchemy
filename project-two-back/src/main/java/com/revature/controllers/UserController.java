@@ -23,7 +23,7 @@ import com.revature.models.User;
 import com.revature.services.UserServices;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class UserController {
 	private UserServices userService;
 	
@@ -45,14 +45,13 @@ public class UserController {
 	}
 	
 	// NOTE(): Bryan's code!!
-	@RequestMapping(value="/register", consumes = {MediaType.APPLICATION_JSON_VALUE})
-	@PostMapping
+	@RequestMapping(value="/users", method = RequestMethod.POST,consumes = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<User> addUser(@RequestBody User user){
 		//@RequestBody is parsing the request's body into an object with Jackson. 
 		user.setGamesWon(0);
 		user.setGamesPlayed(0);
 		userService.addUser(user);
-		return ResponseEntity.status(HttpStatus.CREATED).build();
+		return ResponseEntity.status(HttpStatus.CREATED).body(user);
 		//ResponseEntity wraps the object we are returning and allows to set metadata like a response code.
 	}
 	

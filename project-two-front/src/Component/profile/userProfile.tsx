@@ -11,7 +11,7 @@ type Props = {
             <div className="col-md-4">
                 <div className="card">
                     <div className="card-header">
-                        User {props.user.uId} Information
+                        User {props.user.id} Information
                     </div>
                     <ul className="list-group list-group-flush">
                         <li className="list-group-item">Username: {props.user.username}</li>
@@ -37,7 +37,7 @@ type Props = {
                             return(
                             <React.Fragment>
                                 <tr>
-                                <th className="text-center" scope="row">{friend.uId}</th>
+                                <th className="text-center" scope="row">{friend.id}</th>
                                 <td className="text-center">{friend.username}</td>
                                 <td className="text-center"><span className= {props.user.gamesPlayed<friend.gamesPlayed ? "fw-bold text-success":"fw-bold text-warning"}>{friend.gamesPlayed}</span></td>
                                 <td className="text-center"><span className= {props.user.gamesWon<friend.gamesWon ? "fw-bold text-success":"fw-bold text-warning"}>{friend.gamesWon}</span></td>

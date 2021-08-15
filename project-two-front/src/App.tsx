@@ -23,6 +23,9 @@ function App() {
       history.replace("/");
     }
   }
+  const loginUser = (user:User) => {
+    setUsers(users.concat([user]));
+  }
 
   return (
     <React.Fragment>
@@ -33,7 +36,7 @@ function App() {
                 <Login />
               </Route>
               <Route exact path="/register">
-                <Register />
+                <Register loginUser={loginUser}/>
               </Route>
               <Route exact path="/rules" component={()=>{
                 console.log('in rules now');

@@ -15,7 +15,7 @@ const UserLogin = () => {
       let password=(document.getElementById("password")as HTMLInputElement).value;
       console.log("Before Login");
       let getUser:User= await apiLogin(username,password);
-      console.log("i'm logined in")
+      console.log(getUser);
     }
    return (
           <div className="nav-wrapper container pt-5">

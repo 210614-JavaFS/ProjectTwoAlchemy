@@ -1,5 +1,5 @@
 type Friends={
-    uId:number,
+    id:number,
     username:string,
     gamesPlayed:number,
     gamesWon:number
@@ -7,7 +7,7 @@ type Friends={
 
 export class User{
 
-    constructor(public uId:number, public username:string, public gamesPlayed:number, public gamesWon:number, public friends?:Friends[]){
+    constructor(public id:number, public username:string, public gamesPlayed:number, public gamesWon:number, public friends?:Friends[]){
 
     }
 }

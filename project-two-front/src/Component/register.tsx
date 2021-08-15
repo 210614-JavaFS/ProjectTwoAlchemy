@@ -4,7 +4,11 @@ import { apiAddUser } from "../models/UserApi";
 import { fullUser } from '../utils/types';
 
 
-const Register =() => {
+type Props = {
+  loginUser:any
+}
+
+const Register:React.FC<Props> = (props) =>{
 
 const sendInfo = async () => {
   let first=(document.getElementById("first_name")as HTMLInputElement).value;
@@ -15,8 +19,8 @@ const sendInfo = async () => {
   const newUser:fullUser = {username,password, first, last};
 
   console.log("Before inserting into db : "  + newUser.username);
-  let newUsers:User[] = await apiAddUser(newUser);
-  console.log("after inserting into db : "  + newUser.username);
+  let newUsers:User | undefined = await apiAddUser(newUser);
+  props.loginUser(newUsers);
 
   
 }

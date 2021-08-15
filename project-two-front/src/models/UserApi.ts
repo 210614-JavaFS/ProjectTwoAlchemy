@@ -23,19 +23,18 @@ import { fullUser } from '../utils/types';
     }
     return response.data;
   }
-  export const apiGetUser=async (uId:number):Promise<User|null> =>{
-      const response =await UserRemote.get<User>('/user'+uId);
+  export const apiGetUser=async (id:number):Promise<User|null> =>{
+      const response =await UserRemote.get<User>('/user'+id);
       if(response.status===200){
           return response.data;
       }
       return null;
   }
-  export const apiAddUser = async (user:fullUser):Promise<User[]> => {
-    const response = await UserRemote.post<User[]>('/user', user);
+  export const apiAddUser = async (user:fullUser):Promise<User | undefined> => {
+    const response = await UserRemote.post<User>('/users', user);
   
-    if(response.status===200){
+    if(response.status===201){
+      console.log(response.data);
       return response.data;
     }
-  
-    return [];
   }
