@@ -17,10 +17,12 @@ import { fullUser } from '../utils/types';
       username:username,
       password:password
     }
-    const response=await UserRemote.post<User,any>('/user',body);
+    const response=await UserRemote.post<User,any>('/login',body);
     if(response.status===200){
+      console.log(response.data);
       return response.data;
     }
+
     return response.data;
   }
   export const apiGetUser=async (id:number):Promise<User|null> =>{
@@ -32,6 +34,26 @@ import { fullUser } from '../utils/types';
   }
   export const apiAddUser = async (user:fullUser):Promise<User | undefined> => {
     const response = await UserRemote.post<User>('/users', user);
+  
+    if(response.status===201){
+      console.log(response.data);
+      return response.data;
+    }
+  }
+  
+  export const updateUser = async (user:User):Promise<User | undefined> => {
+    const response = await UserRemote.put<User>('/users', user);
+  
+    if(response.status===202){
+      console.log(response.data);
+      return response.data;
+    }
+
+    return response.data;
+  }
+
+  export const apiAddFriend = async (user:fullUser):Promise<User | undefined> => {
+    const response = await UserRemote.post<User>('/addFriend', user);
   
     if(response.status===201){
       console.log(response.data);

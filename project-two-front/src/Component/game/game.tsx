@@ -4,11 +4,13 @@ import {User} from '../../models/user';
 import GameInput from './gameInput';
 import {ScoreCard} from './scoreCard';
 import {wordScorer,wordTiler} from '../../utils/utils';
+import { updateUser } from '../../models/UserApi';
 
 type userCard = {
     position:number,
     username:string,
-    score:number
+    score:number,
+    id:number
 }
 type Props = {
     users:User[],
@@ -24,7 +26,7 @@ export const Game:React.FC<Props> = (props)=>{
         console.log(props.users);
         let count:number =0;
         for(let user of props.users){
-            let current:userCard = {"position":count++,"username":user.username,"score":0};
+            let current:userCard = {"position":count++,"username":user.username,"score":0, "id":user.id};
             cards.push(current);
         }
         console.log(cards);
@@ -43,6 +45,24 @@ export const Game:React.FC<Props> = (props)=>{
 
     const updateTiler = (input:string)=>{
         htmlString = wordTiler(input);
+    }
+
+    const endGame = () => {
+        let winner:userCard = scoreCard.reduce((a,b)=>a.score>b.score ? a:b);
+        let updatedUsers:User[] = props.users.map(user=>{
+            if(winner.score>0){
+                if( user.id === winner.id){
+                    user.gamesWon+=1;
+                }
+               user.gamesPlayed+=1; 
+               console.log(user);
+               updateUser(user);
+            }
+            return user;
+        })
+        
+        console.log(props.users);
+        console.log(updatedUsers);
     }
 
     async function handleSubmit(e:any):Promise<any> {
@@ -83,6 +103,7 @@ export const Game:React.FC<Props> = (props)=>{
                 </div>
                 
             </div>
+            <button type="button" onClick={endGame}>END GAME</button>
         </div>
     )
 }

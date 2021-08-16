@@ -45,7 +45,7 @@ public class UserController {
 	}
 	
 	// NOTE(): Bryan's code!!
-	@RequestMapping(value="/users", method = RequestMethod.POST,consumes = {MediaType.APPLICATION_JSON_VALUE})
+	@RequestMapping(value="/users", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<User> addUser(@RequestBody User user){
 		//@RequestBody is parsing the request's body into an object with Jackson. 
 		user.setGamesWon(0);
@@ -55,11 +55,18 @@ public class UserController {
 		//ResponseEntity wraps the object we are returning and allows to set metadata like a response code.
 	}
 	
-	@PutMapping("/update")
-	public ResponseEntity<User> updateUser(@RequestBody User user){
+	@PutMapping("/users")
+	@CrossOrigin(origins = "*")
+	public ResponseEntity<User> updateUser(@RequestBody User userToUpdate){
 		//@RequestBody is parsing the request's body into an object with Jackson. 
+		User user = userService.findUserById(userToUpdate.getId());
+		
+		System.out.println(userToUpdate);
+		System.out.println(user);
+		user.setGamesPlayed(userToUpdate.getGamesPlayed());
+		user.setGamesWon(userToUpdate.getGamesWon());
 		userService.update(user);
-		return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(user);
 		//ResponseEntity wraps the object we are returning and allows to set metadata like a response code.
 	}	
 
@@ -105,8 +112,8 @@ public class UserController {
 		return new ResponseEntity<Object>(returnedData,HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/login", consumes = {MediaType.APPLICATION_JSON_VALUE})
-	@PostMapping
+	@RequestMapping(value="/login", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
+	@CrossOrigin(origins = "*")
 	public  ResponseEntity<Object> userLogin(@RequestBody User loginUserInfo)
 	{
 		// NOTES(): I don't know if this a good idea security wise, but it's much easier.
@@ -121,8 +128,8 @@ public class UserController {
 				success = true;
 				returnedData.put("id",  user.getId());
 				returnedData.put("username",  user.getUsername());
-				returnedData.put("games_won",  user.getGamesWon());
-				returnedData.put("games_played", user.getGamesPlayed());
+				returnedData.put("gamesWon",  user.getGamesWon());
+				returnedData.put("gamesPlayed", user.getGamesPlayed());
 				
 				List<Friend> userFriends = user.GetFriends();
 				List<HashMap<String, Object>> userFriendInfo = new ArrayList<HashMap<String, Object>>();
@@ -141,7 +148,7 @@ public class UserController {
 					
 					userFriendInfo.add(friendsInfo);
 				}
-				returnedData.put("friends", userFriendInfo);;
+				returnedData.put("friends", userFriendInfo);
 			} 
 		} 
 		
@@ -149,7 +156,7 @@ public class UserController {
 		{
 			returnedData.put("error", "Login is incorrect");
 		}
-		
+		System.out.println(returnedData);
 		return  new ResponseEntity<Object>(returnedData,HttpStatus.OK);
 	}
 }

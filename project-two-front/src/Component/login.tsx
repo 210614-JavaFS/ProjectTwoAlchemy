@@ -2,8 +2,11 @@ import React,{useEffect, useState} from 'react';
 import { User } from '../models/user';
 import { apiGetUser, apiGetUsers, apiLogin } from '../models/UserApi';
 
+type Props = {
+  loginUser:any
+}
 
-const UserLogin = () => {
+const UserLogin:React.FC<Props> = (props) =>{
   const [user, setUser]=useState<User[]>([]);
   const [error,setError]=useState("");
   
@@ -15,7 +18,8 @@ const UserLogin = () => {
       let password=(document.getElementById("password")as HTMLInputElement).value;
       console.log("Before Login");
       let getUser:User= await apiLogin(username,password);
-      console.log(getUser);
+
+      props.loginUser(getUser);
     }
    return (
           <div className="nav-wrapper container pt-5">

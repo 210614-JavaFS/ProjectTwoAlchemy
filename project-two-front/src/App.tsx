@@ -25,6 +25,7 @@ function App() {
   }
   const loginUser = (user:User) => {
     setUsers(users.concat([user]));
+    console.log(users);
   }
 
   return (
@@ -33,7 +34,7 @@ function App() {
       <NavBar users={users} logout={logout}/>
         <Switch>
               <Route exact path="/">
-                <Login />
+                <Login loginUser={loginUser} />
               </Route>
               <Route exact path="/register">
                 <Register loginUser={loginUser}/>

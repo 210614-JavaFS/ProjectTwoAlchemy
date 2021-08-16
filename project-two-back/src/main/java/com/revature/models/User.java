@@ -13,13 +13,16 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
 
 @Component
 @Entity
+@Scope("prototype")
 public class User {
 	
 	@Id
@@ -30,12 +33,20 @@ public class User {
 	private String username;
 	@NotNull
 	private String password;
+	@JsonProperty("games")
 	private int gamesWon;
+	@JsonProperty("gamesPlayed")
 	private int gamesPlayed;
 	
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 	@JsonManagedReference
-	private List<Friend> friendList = new ArrayList<>();
+	private List<Friend> friendList;
+	
+	
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	
 	public List<Friend> GetFriends()
 	{
@@ -58,10 +69,6 @@ public class User {
 	}
 	public void setUsername(String username) {
 		this.username = username;
-	}
-	public User() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 	public int getGamesWon() {
 		return gamesWon;

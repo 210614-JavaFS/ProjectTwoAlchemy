@@ -23,7 +23,7 @@ public class Friend {
 	private int id;
 	private int fuid;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn
 	@JsonBackReference
 	private User user;
