@@ -7,16 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.test.context.ContextConfiguration;
 
-
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(locations="file:src/main/webapp/WEB-INF/applicationContext.xml")
 public class UserServicesTest {
 	private UserRepo userRepoImpl;
 	UserServices userServices = new UserServices(userRepoImpl);
 	@Test
-	public boolean testUserCRUD()
+	public void testUserCRUD()
 	{
 		boolean returnValue = false;
 		int testId = 12345;
@@ -40,16 +36,16 @@ public class UserServicesTest {
 			}
 			
 
-			userServices.delete(testUser);
-			if(testUser.getUsername().length() < 1)
-			{
-				returnValue = true;
-			}
-			else
-			{
-				System.out.println("Delete User Failed");
-				returnValue = false;
-			}
+//			userServices.delete(testUser);
+//			if(testUser.getUsername().length() < 1)
+//			{
+//				returnValue = true;
+//			}
+//			else
+//			{
+//				System.out.println("Delete User Failed");
+//				returnValue = false;
+//			}
 			returnValue = false;
 		}else
 		{
@@ -58,7 +54,6 @@ public class UserServicesTest {
 		}
 		System.out.println("User Crud test successful");
 		assertEquals(returnValue , true);
-		return returnValue;
 	}
 	
 
