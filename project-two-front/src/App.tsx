@@ -12,7 +12,7 @@ import Game from './Component/game/game';
 
 
 function App() {
-  const [users, setUsers] = useState<User[]>(data);
+  const [users, setUsers] = useState<User[]>([]);
   const history = useHistory();
   const logout = () =>{
     setUsers([]);

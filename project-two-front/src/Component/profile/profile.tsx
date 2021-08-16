@@ -17,7 +17,7 @@ type Props = {
              </div>
              {props.users.map(user =>{
                  return(
-                     <div className="m-4 border border-dark p-2 d-flex justify-content-center">
+                     <div className="m-4 border border-dark p-2">
                          <UserProfile user={user} />  
                      </div>    
                 )
