@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -27,7 +29,7 @@ import com.revature.services.UserServices;
 @CrossOrigin(origins = "*")
 public class UserController {
 	private UserServices userService;
-	
+	private static Logger log = LoggerFactory.getLogger(UserController.class);
 	@Autowired
 	public UserController(UserServices userService)
 	{
@@ -66,7 +68,9 @@ public class UserController {
 		User user = userService.findUserById(userToUpdate.getId());
 		
 		System.out.println(userToUpdate);
+		log.debug(userToUpdate.toString());
 		System.out.println(user);
+		log.debug(user.toString());
 		user.setGamesPlayed(userToUpdate.getGamesPlayed());
 		user.setGamesWon(userToUpdate.getGamesWon());
 		userService.update(user);
@@ -161,6 +165,7 @@ public class UserController {
 		{
 			returnedData.put("error", "Login is incorrect");
 		}
+		log.debug(returnedData);
 		System.out.println(returnedData);
 		return  new ResponseEntity<Object>(returnedData,HttpStatus.OK);
 	}
