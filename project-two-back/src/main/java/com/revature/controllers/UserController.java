@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.jasypt.util.password.StrongPasswordEncryptor;
 
 import com.revature.models.Friend;
 import com.revature.models.User;
@@ -50,6 +51,9 @@ public class UserController {
 		//@RequestBody is parsing the request's body into an object with Jackson. 
 		user.setGamesWon(0);
 		user.setGamesPlayed(0);
+		StrongPasswordEncryptor encryptor = new StrongPasswordEncryptor();
+		String password = encryptor.encryptPassword(user.getPassword());
+		user.setPassword(password);
 		userService.addUser(user);
 		return ResponseEntity.status(HttpStatus.CREATED).body(user);
 		//ResponseEntity wraps the object we are returning and allows to set metadata like a response code.
@@ -116,6 +120,7 @@ public class UserController {
 	@CrossOrigin(origins = "*")
 	public  ResponseEntity<Object> userLogin(@RequestBody User loginUserInfo)
 	{
+		StrongPasswordEncryptor encryptor = new StrongPasswordEncryptor();
 		// NOTES(): I don't know if this a good idea security wise, but it's much easier.
 		boolean success = false;
 		HashMap<String,Object> returnedData = new HashMap<String,Object>();
@@ -123,7 +128,7 @@ public class UserController {
 		
 		if (user != null)
 		{
-			if (user.getPassword().equals(loginUserInfo.getPassword()))
+			if (encryptor.checkPassword(loginUserInfo.getPassword(), user.getPassword()))
 			{
 				success = true;
 				returnedData.put("id",  user.getId());
