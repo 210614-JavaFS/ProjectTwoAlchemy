@@ -13,11 +13,8 @@ import { fullUser } from '../utils/types';
       return [];
   }
   export const apiLogin=async (username:string ,password:string):Promise<User>=>{
-    let body={
-      username:username,
-      password:password
-    }
-    const response=await UserRemote.post<User,any>('/user',body);
+    const newLogin={username,password}
+    const response=await UserRemote.post<User,any>('/user',newLogin);
     if(response.status===200){
       return response.data;
     }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React ,{useState}from 'react';
 import { Route, Switch, useHistory, withRouter } from 'react-router-dom';
 import {User} from './models/user';
 import './App.css';
@@ -33,7 +33,7 @@ function App() {
                 <Login />
               </Route>
               <Route exact path="/register">
-                <Register />
+                <Register/>
               </Route>
               <Route exact path="/rules" component={()=>{
                 console.log('in rules now');
