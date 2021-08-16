@@ -26,6 +26,7 @@ function App() {
   const loginUser = (user:User) => {
     setUsers(users.concat([user]));
     console.log(users);
+    history.replace("/profile");
   }
 
   return (
@@ -48,7 +49,7 @@ function App() {
                 <Profile users={users} checkUserLoggedIn={checkUserLoggedIn}/>
               </Route>  
               <Route exact path="/game" >
-                <Game users={users} checkUserLoggedIn={checkUserLoggedIn}/>
+                <Game users={users} setUsers={setUsers} checkUserLoggedIn={checkUserLoggedIn}/>
               </Route>       
       </Switch>
      </div>

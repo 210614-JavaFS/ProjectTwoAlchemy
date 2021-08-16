@@ -8,7 +8,7 @@ type Props = {
  export const UserProfile:React.FC<Props> = (props) =>{
     return(
         <div className="row">
-            <div className="col-md-4">
+            <div className="col-md">
                 <div className="card">
                     <div className="card-header">
                         User {props.user.id} Information
@@ -20,7 +20,11 @@ type Props = {
                     </ul>
                 </div>
             </div>
-            <div className="col-md-5">
+            {
+                props.user.friends?.length 
+                ?
+                <React.Fragment>
+                    <div className="col-md-5">
                 <h6>Friends</h6>
                 <table className="table table-sm table-borderless">
                     <thead>
@@ -51,7 +55,11 @@ type Props = {
                     </tbody>
                 </table>
             </div>
-            <div className="col-3">
+                </React.Fragment>
+            : null
+            }
+            
+            <div className="col-sm">
                 <form>
                     <label className="d-block" htmlFor="addFriendInput"><b>Add Friend:</b></label>
                     <div className="d-inline">

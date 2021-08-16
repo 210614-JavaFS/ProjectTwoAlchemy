@@ -14,6 +14,7 @@ type userCard = {
 }
 type Props = {
     users:User[],
+    setUsers:any
     checkUserLoggedIn:any
 }
 
@@ -60,9 +61,8 @@ export const Game:React.FC<Props> = (props)=>{
             }
             return user;
         })
-        
-        console.log(props.users);
-        console.log(updatedUsers);
+        props.setUsers(updatedUsers);
+        alert("Winner is "+winner.username);
     }
 
     async function handleSubmit(e:any):Promise<any> {

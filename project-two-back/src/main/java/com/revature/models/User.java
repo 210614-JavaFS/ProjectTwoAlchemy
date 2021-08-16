@@ -33,7 +33,7 @@ public class User {
 	private String username;
 	@NotNull
 	private String password;
-	@JsonProperty("games")
+	@JsonProperty("gamesWon")
 	private int gamesWon;
 	@JsonProperty("gamesPlayed")
 	private int gamesPlayed;
