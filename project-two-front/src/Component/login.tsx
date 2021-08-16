@@ -24,8 +24,11 @@ const UserLogin:React.FC<Props> = (props) =>{
       let password=(document.getElementById("password")as HTMLInputElement).value;
       console.log("Before Login");
       let getUser:User= await apiLogin(username,password);
-
-      props.loginUser(getUser);
+      if(getUser.id){
+        props.loginUser(getUser);
+      }else{
+        alert("Invalid Credentials");
+      }    
   }
    return (
     <div className="Login">
