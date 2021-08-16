@@ -165,7 +165,7 @@ public class UserController {
 		{
 			returnedData.put("error", "Login is incorrect");
 		}
-		log.debug(returnedData);
+		log.debug(returnedData.toString());
 		System.out.println(returnedData);
 		return  new ResponseEntity<Object>(returnedData,HttpStatus.OK);
 	}
