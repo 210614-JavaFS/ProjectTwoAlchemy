@@ -14,7 +14,7 @@ public class UserServices {
 	private UserRepo userRepoImpl;
 	
 	@Autowired
-	private UserServices( UserRepo userRepoImpl)
+	UserServices( UserRepo userRepoImpl)
 	{
 		super();
 		this.userRepoImpl = userRepoImpl;
@@ -38,5 +38,9 @@ public class UserServices {
 	public void addUser(User user)
 	{
 		this.userRepoImpl.insert(user);
+	}
+	public void delete(User user)
+	{
+		this.userRepoImpl.delete(user);
 	}
 }
