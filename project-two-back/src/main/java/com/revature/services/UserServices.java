@@ -14,7 +14,7 @@ public class UserServices {
 	private UserRepo userRepoImpl;
 	
 	@Autowired
-	private UserServices( UserRepo userRepoImpl)
+	public UserServices( UserRepo userRepoImpl)
 	{
 		super();
 		this.userRepoImpl = userRepoImpl;

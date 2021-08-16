@@ -37,18 +37,9 @@ public class UserController {
 		this.userService = userService;
 	}
 	
-	@RequestMapping(value="/", consumes = { MediaType.APPLICATION_JSON_VALUE})
-	@GetMapping
-	public ResponseEntity<Object> index()
-	{
-		HashMap<String,Object> returnedData = new HashMap<String,Object>();
-		returnedData.put("success", "it works~");
-		
-		return new ResponseEntity<Object>(returnedData,HttpStatus.OK);
-	}
 	
-	// NOTE(): Bryan's code!!
 	@RequestMapping(value="/users", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
+	@CrossOrigin(origins = "*")
 	public ResponseEntity<User> addUser(@RequestBody User user){
 		//@RequestBody is parsing the request's body into an object with Jackson. 
 		user.setGamesWon(0);
@@ -79,48 +70,7 @@ public class UserController {
 	}	
 
 	
-	@RequestMapping(value="/updateGamesPlayed", consumes = {MediaType.APPLICATION_JSON_VALUE})
-	@PostMapping
-	public ResponseEntity<Object> updateGamePlayed(@RequestBody User updatedInfo)
-	{
-		int userID = updatedInfo.getId();
-		int gamesPlayed = updatedInfo.getGamesPlayed();
-		
-		User user = userService.findUserById(updatedInfo.getId());
-		HashMap<String, Object> returnedData = new HashMap<String, Object>();
-		if (user != null)
-		{
-			user.setGamesPlayed(gamesPlayed);
-			userService.update(user);
-			returnedData.put("success", "true");
-		} else {
-			returnedData.put("error", "user with the id " + userID + " does not exist!");
-		}
-		
-		return new ResponseEntity<Object>(returnedData,HttpStatus.OK);
-	}
-	@RequestMapping(value="/updateWins", consumes = {MediaType.APPLICATION_JSON_VALUE})
-	@PostMapping
-	public ResponseEntity<Object> updateWins(@RequestBody User updatedInfo)
-	{
-		int userId =  updatedInfo.getId();
-		int gamesWon =   updatedInfo.getGamesWon();
-		
-		User user =  userService.findUserById(userId);
-		HashMap<String,Object> returnedData = new HashMap<String,Object>();
-		
-		if (user != null)
-		{
-			user.setGamesWon(gamesWon);
-			userService.update(user);
-			returnedData.put("success", "true");
-		} else {
-			returnedData.put("error", "User not found");
-		}
-		return new ResponseEntity<Object>(returnedData,HttpStatus.OK);
-	}
-	
-	@RequestMapping(value="/login", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
+	@RequestMapping(value="/", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
 	@CrossOrigin(origins = "*")
 	public  ResponseEntity<Object> userLogin(@RequestBody User loginUserInfo)
 	{

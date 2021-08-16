@@ -17,7 +17,7 @@ import { fullUser } from '../utils/types';
       username:username,
       password:password
     }
-    const response=await UserRemote.post<User,any>('/login',body);
+    const response=await UserRemote.post<User,any>('/',body);
     if(response.status===200){
       console.log(response.data);
       return response.data;
