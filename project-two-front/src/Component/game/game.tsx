@@ -15,7 +15,8 @@ type userCard = {
 type Props = {
     users:User[],
     setUsers:any
-    checkUserLoggedIn:any
+    checkUserLoggedIn:any,
+    history:any
 }
 
 let htmlString = "";
@@ -63,6 +64,7 @@ export const Game:React.FC<Props> = (props)=>{
         })
         props.setUsers(updatedUsers);
         alert("Winner is "+winner.username);
+        props.history.replace("/profile");
     }
 
     async function handleSubmit(e:any):Promise<any> {
@@ -85,7 +87,8 @@ export const Game:React.FC<Props> = (props)=>{
     }
 
     return(
-        <div className="container-fluid p-3  min-vh-100">
+        <React.Fragment>
+        <div className="container-fluid p-3  min-vh-90">
             <div className="row d-flex justify-content-center">
                 {scoreCard.map(user=>{
                     return(
@@ -103,8 +106,13 @@ export const Game:React.FC<Props> = (props)=>{
                 </div>
                 
             </div>
-            <button type="button" onClick={endGame}>END GAME</button>
+            <div className="row">
+            <div className="col-sm-11"></div>
+              <button type="button" className="btn btn-danger mt-2 col-sm-1" onClick={endGame}>END GAME</button>  
         </div>
+        </div>
+        
+        </React.Fragment>
     )
 }
 

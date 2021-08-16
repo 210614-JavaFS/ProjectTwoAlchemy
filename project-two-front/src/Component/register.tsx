@@ -45,7 +45,7 @@ function back(){
           </div>
 
           <div className="form-group">
-              <label>Email</label>
+              <label>Username</label>
               <input type="text" className="form-control" placeholder="Enter username" id="username"/>
           </div>
 

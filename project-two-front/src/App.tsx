@@ -49,7 +49,7 @@ function App() {
                 <Profile users={users} checkUserLoggedIn={checkUserLoggedIn}/>
               </Route>  
               <Route exact path="/game" >
-                <Game users={users} setUsers={setUsers} checkUserLoggedIn={checkUserLoggedIn}/>
+                <Game history={history} users={users} setUsers={setUsers} checkUserLoggedIn={checkUserLoggedIn}/>
               </Route>       
       </Switch>
      </div>
